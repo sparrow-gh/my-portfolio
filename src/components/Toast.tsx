@@ -17,31 +17,23 @@ interface ToastProps {
 
 const Toast: React.FC<ToastProps> = ({ message, type, isVisible, onClose }) => {
   const variants = {
-    hidden: { 
-      opacity: 0, 
-      y: -50, 
+    hidden: {
+      opacity: 0,
+      y: -50,
       scale: 0.8,
-      rotateX: -90 
+      rotateX: -90
     },
-    visible: { 
-      opacity: 1, 
-      y: 0, 
+    visible: {
+      opacity: 1,
+      y: 0,
       scale: 1,
-      rotateX: 0,
-      transition: {
-        type: "spring",
-        stiffness: 300,
-        damping: 20
-      }
+      rotateX: 0
     },
-    exit: { 
-      opacity: 0, 
-      y: -50, 
+    exit: {
+      opacity: 0,
+      y: -50,
       scale: 0.8,
-      rotateX: -90,
-      transition: {
-        duration: 0.3
-      }
+      rotateX: -90
     }
   };
 
@@ -53,6 +45,11 @@ const Toast: React.FC<ToastProps> = ({ message, type, isVisible, onClose }) => {
           initial="hidden"
           animate="visible"
           exit="exit"
+          transition={{
+            type: "spring",
+            stiffness: 300,
+            damping: 20
+          }}
           className="fixed top-24 right-4 z-[60] max-w-sm"
         >
           <div className={`

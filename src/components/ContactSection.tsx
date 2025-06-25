@@ -200,28 +200,7 @@ const ContactSection = () => {
             >
               <h3 className="text-2xl font-bold mb-6">أرسل رسالة</h3>
 
-              {/* Status Messages */}
-              {submitStatus === 'success' && (
-                <motion.div
-                  initial={{ opacity: 0, y: -10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  className="mb-6 p-4 bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg flex items-center space-x-3 rtl:space-x-reverse"
-                >
-                  <CheckCircleIcon className="h-5 w-5 text-green-600 dark:text-green-400" />
-                  <p className="text-green-700 dark:text-green-300">{submitMessage}</p>
-                </motion.div>
-              )}
 
-              {submitStatus === 'error' && (
-                <motion.div
-                  initial={{ opacity: 0, y: -10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  className="mb-6 p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg flex items-center space-x-3 rtl:space-x-reverse"
-                >
-                  <ExclamationCircleIcon className="h-5 w-5 text-red-600 dark:text-red-400" />
-                  <p className="text-red-700 dark:text-red-300">{submitMessage}</p>
-                </motion.div>
-              )}
 
               <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
                 {/* Name and Email Row */}
