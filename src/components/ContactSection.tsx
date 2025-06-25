@@ -51,7 +51,7 @@ const ContactSection = () => {
     {
       icon: MapPinIcon,
       title: 'الموقع',
-      value: 'الرياض، المملكة العربية السعودية',
+      value: 'العراق',
       link: '#'
     }
   ];

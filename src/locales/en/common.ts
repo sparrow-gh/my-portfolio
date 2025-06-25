@@ -13,7 +13,7 @@ export const common = {
   // Hero Section
   hero: {
     greeting: 'Hello, I\'m',
-    name: 'Ehab Al-Iraqi',
+    name: 'Ehab ',
     title: 'Web Developer & Designer',
     subtitle: 'I develop modern and interactive web applications using the latest technologies',
     location: 'Iraq 🇮🇶',

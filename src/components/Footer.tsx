@@ -90,7 +90,7 @@ const Footer = () => {
                 className="flex items-center space-x-3 rtl:space-x-reverse text-gray-600 dark:text-gray-400"
               >
                 <MapPinIcon className="h-5 w-5 text-blue-600" />
-                <span>الرياض، المملكة العربية السعودية</span>
+                <span> العراق </span>
               </motion.div>
             </div>
           </div>
@@ -171,7 +171,7 @@ const Footer = () => {
             >
               © {currentYear} Portfolio. جميع الحقوق محفوظة. صُنع بـ{' '}
               <HeartIcon className="inline h-4 w-4 text-red-500 mx-1" />
-              في السعودية
+              في العراق
             </motion.p>
 
             {/* Back to Top Button */}

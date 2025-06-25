@@ -28,12 +28,13 @@ const LanguageToggle = () => {
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -10 }}
-          className="text-sm font-medium"
+          transition={{ duration: 0.3 }}
+          className="text-sm font-medium min-w-[20px] text-center"
         >
           {locale === 'ar' ? 'EN' : 'عر'}
         </motion.span>
       </div>
-      
+
       {/* Glow effect */}
       <motion.div
         className="absolute inset-0 rounded-full opacity-0 group-hover:opacity-30"
@@ -42,6 +43,14 @@ const LanguageToggle = () => {
         }}
         animate={{ scale: [1, 1.2, 1] }}
         transition={{ duration: 2, repeat: Infinity }}
+      />
+
+      {/* Click ripple effect */}
+      <motion.div
+        className="absolute inset-0 rounded-full bg-white opacity-0"
+        animate={{ scale: [0, 1], opacity: [0.3, 0] }}
+        transition={{ duration: 0.6 }}
+        key={locale}
       />
     </motion.button>
   );

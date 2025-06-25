@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter, Cairo, Poppins } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/contexts/ThemeContext";
+import { TranslationProvider } from "@/contexts/TranslationContext";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import BackToTop from "@/components/BackToTop";
@@ -48,16 +49,18 @@ export default function RootLayout({
       <body
         className={`${inter.variable} ${cairo.variable} ${poppins.variable} font-cairo antialiased bg-white dark:bg-gray-900 text-gray-900 dark:text-white transition-colors duration-500`}
       >
-        <ThemeProvider>
-          <div className="min-h-screen flex flex-col">
-            <Header />
-            <main className="flex-grow pt-16 lg:pt-20">
-              {children}
-            </main>
-            <Footer />
-            <BackToTop />
-          </div>
-        </ThemeProvider>
+        <TranslationProvider>
+          <ThemeProvider>
+            <div className="min-h-screen flex flex-col">
+              <Header />
+              <main className="flex-grow pt-16 lg:pt-20">
+                {children}
+              </main>
+              <Footer />
+              <BackToTop />
+            </div>
+          </ThemeProvider>
+        </TranslationProvider>
       </body>
     </html>
   );
