@@ -2,13 +2,15 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { 
+import { useTranslation } from '@/hooks/useTranslation';
+import {
   ArrowDownIcon,
   DocumentArrowDownIcon,
   ChatBubbleLeftRightIcon
 } from '@heroicons/react/24/outline';
 
 const HeroSection = () => {
+  const { t, isRTL } = useTranslation();
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
     if (element) {
@@ -35,7 +37,7 @@ const HeroSection = () => {
             className="mb-6"
           >
             <span className="inline-block px-4 py-2 bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 rounded-full text-sm font-medium mb-4">
-              مرحباً بك في موقعي الشخصي 👋
+              {t.hero.greeting} 👋
             </span>
           </motion.div>
 
@@ -46,12 +48,11 @@ const HeroSection = () => {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight"
           >
-            أنا{' '}
-            <span className="gradient-text">
-              مطور ويب
-            </span>
+            {t.hero.name}{' '}
             <br />
-            ومصمم تجارب رقمية
+            <span className="gradient-text">
+              {t.hero.title}
+            </span>
           </motion.h1>
 
           {/* Description */}
@@ -61,8 +62,7 @@ const HeroSection = () => {
             transition={{ duration: 0.8, delay: 0.4 }}
             className="text-lg md:text-xl text-gray-600 dark:text-gray-300 mb-8 max-w-2xl mx-auto leading-relaxed"
           >
-            أحول الأفكار إلى مواقع ويب وتطبيقات تفاعلية مذهلة. 
-            متخصص في React، Next.js، وتقنيات الويب الحديثة.
+{t.hero.subtitle}
           </motion.p>
 
           {/* CTA Buttons */}
@@ -78,7 +78,7 @@ const HeroSection = () => {
               onClick={() => scrollToSection('projects')}
               className="btn-primary flex items-center space-x-2 rtl:space-x-reverse"
             >
-              <span>استعرض أعمالي</span>
+              <span>{t.nav.projects}</span>
               <ArrowDownIcon className="h-5 w-5" />
             </motion.button>
 
@@ -89,7 +89,7 @@ const HeroSection = () => {
               className="btn-secondary flex items-center space-x-2 rtl:space-x-reverse"
             >
               <ChatBubbleLeftRightIcon className="h-5 w-5" />
-              <span>تواصل معي</span>
+              <span>{t.nav.contact}</span>
             </motion.button>
           </motion.div>
 

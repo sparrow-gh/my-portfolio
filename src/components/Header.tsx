@@ -3,26 +3,29 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTheme } from '@/contexts/ThemeContext';
-import { 
-  SunIcon, 
-  MoonIcon, 
-  Bars3Icon, 
-  XMarkIcon 
+import { useTranslation } from '@/hooks/useTranslation';
+import LanguageToggle from './LanguageToggle';
+import {
+  SunIcon,
+  MoonIcon,
+  Bars3Icon,
+  XMarkIcon
 } from '@heroicons/react/24/outline';
 
 const Header = () => {
   const { theme, toggleTheme } = useTheme();
+  const { t, isRTL } = useTranslation();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const navItems = [
-    { name: 'الرئيسية', href: '#home', isInternal: true },
-    { name: 'نبذة عني', href: '#about', isInternal: true },
-    { name: 'المهارات', href: '#skills', isInternal: true },
-    { name: 'الأعمال', href: '#projects', isInternal: true },
-    { name: 'الخدمات', href: '#services', isInternal: true },
-    { name: 'المدونة', href: '/blog', isInternal: false },
-    { name: 'تواصل معي', href: '#contact', isInternal: true },
+    { name: t.nav.home, href: '#home', isInternal: true },
+    { name: t.nav.about, href: '#about', isInternal: true },
+    { name: t.nav.skills, href: '#skills', isInternal: true },
+    { name: t.nav.projects, href: '#projects', isInternal: true },
+    { name: t.nav.services, href: '#services', isInternal: true },
+    { name: t.nav.blog, href: '/blog', isInternal: false },
+    { name: t.nav.contact, href: '#contact', isInternal: true },
   ];
 
   useEffect(() => {
@@ -101,8 +104,10 @@ const Header = () => {
             </div>
           </div>
 
-          {/* Theme Toggle & Mobile Menu Button */}
-          <div className="flex items-center space-x-4 rtl:space-x-reverse">
+          {/* Language Toggle, Theme Toggle & Mobile Menu Button */}
+          <div className="flex items-center space-x-3 rtl:space-x-reverse">
+            <LanguageToggle />
+
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
