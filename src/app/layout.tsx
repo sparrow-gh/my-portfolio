@@ -20,8 +20,12 @@ export const metadata: Metadata = {
   description: "موقع شخصي لعرض الأعمال والمشاريع والخدمات التقنية",
   keywords: "تطوير مواقع, تصميم ويب, برمجة, React, Next.js",
   authors: [{ name: "Portfolio Developer" }],
-  viewport: "width=device-width, initial-scale=1",
   robots: "index, follow",
+};
+
+export const viewport = {
+  width: 'device-width',
+  initialScale: 1,
 };
 
 export default function RootLayout({

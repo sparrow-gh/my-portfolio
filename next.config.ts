@@ -3,7 +3,7 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   // Enable experimental features
   experimental: {
-    optimizeCss: true,
+    // optimizeCss: true, // Disabled due to critters module issue
   },
 
   // Image optimization
@@ -53,9 +53,8 @@ const nextConfig: NextConfig = {
     ];
   },
 
-  // Webpack optimization
+  // Webpack optimization (when not using turbopack)
   webpack: (config, { dev, isServer }) => {
-    // Optimize bundle size
     if (!dev && !isServer) {
       config.optimization.splitChunks = {
         chunks: 'all',
@@ -68,7 +67,6 @@ const nextConfig: NextConfig = {
         },
       };
     }
-
     return config;
   },
 
