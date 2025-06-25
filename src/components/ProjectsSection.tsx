@@ -226,12 +226,47 @@ const ProjectsSection = () => {
                     key={project._id}
                     variants={itemVariants}
                     layout
-                    className="group bg-white dark:bg-gray-800 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2"
+                    className="group bg-white dark:bg-gray-800 rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-3 border border-gray-100 dark:border-gray-700 hover:border-blue-200 dark:hover:border-blue-600"
+                    style={{
+                      boxShadow: 'var(--shadow-medium)',
+                    }}
+                    whileHover={{
+                      boxShadow: 'var(--shadow-large)',
+                    }}
                   >
                     {/* Project Image */}
-                    <div className="relative overflow-hidden">
-                      <div className="w-full h-48 bg-gradient-to-br from-blue-100 to-green-100 dark:from-blue-900 dark:to-green-900 flex items-center justify-center">
-                        <span className="text-4xl">🚀</span>
+                    <div className="relative overflow-hidden group-hover:scale-105 transition-transform duration-500">
+                      <div className="w-full h-56 bg-gradient-to-br from-blue-100 via-purple-50 to-green-100 dark:from-blue-900 dark:via-purple-900 dark:to-green-900 flex items-center justify-center relative">
+                        <motion.span
+                          className="text-5xl filter drop-shadow-lg"
+                          whileHover={{ scale: 1.2, rotate: 10 }}
+                          transition={{ duration: 0.3 }}
+                        >
+                          🚀
+                        </motion.span>
+
+                        {/* Animated background particles */}
+                        <div className="absolute inset-0 opacity-20">
+                          {[...Array(6)].map((_, i) => (
+                            <motion.div
+                              key={i}
+                              className="absolute w-2 h-2 bg-blue-400 rounded-full"
+                              style={{
+                                left: `${20 + i * 15}%`,
+                                top: `${30 + (i % 2) * 40}%`,
+                              }}
+                              animate={{
+                                y: [0, -10, 0],
+                                opacity: [0.3, 0.8, 0.3],
+                              }}
+                              transition={{
+                                duration: 2 + i * 0.5,
+                                repeat: Infinity,
+                                ease: "easeInOut",
+                              }}
+                            />
+                          ))}
+                        </div>
                       </div>
                       
                       {/* Overlay */}

@@ -3,7 +3,8 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useForm } from 'react-hook-form';
-import { 
+import Toast from './Toast';
+import {
   EnvelopeIcon,
   PhoneIcon,
   MapPinIcon,
@@ -23,8 +24,9 @@ interface ContactFormData {
 
 const ContactSection = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
-  const [submitMessage, setSubmitMessage] = useState('');
+  const [showToast, setShowToast] = useState(false);
+  const [toastMessage, setToastMessage] = useState('');
+  const [toastType, setToastType] = useState<'success' | 'error'>('success');
 
   const {
     register,
@@ -54,9 +56,14 @@ const ContactSection = () => {
     }
   ];
 
+  const showToastMessage = (message: string, type: 'success' | 'error') => {
+    setToastMessage(message);
+    setToastType(type);
+    setShowToast(true);
+  };
+
   const onSubmit = async (data: ContactFormData) => {
     setIsSubmitting(true);
-    setSubmitStatus('idle');
 
     try {
       const response = await fetch('/api/contact', {
@@ -70,16 +77,13 @@ const ContactSection = () => {
       const result = await response.json();
 
       if (result.success) {
-        setSubmitStatus('success');
-        setSubmitMessage(result.message);
+        showToastMessage('🎉 تم إرسال رسالتك بنجاح! سأقوم بالرد عليك قريباً.', 'success');
         reset();
       } else {
-        setSubmitStatus('error');
-        setSubmitMessage(result.error || 'حدث خطأ أثناء إرسال الرسالة');
+        showToastMessage(result.error || '❌ حدث خطأ أثناء إرسال الرسالة', 'error');
       }
     } catch (error) {
-      setSubmitStatus('error');
-      setSubmitMessage('حدث خطأ في الاتصال. يرجى المحاولة مرة أخرى.');
+      showToastMessage('❌ حدث خطأ في الاتصال. يرجى المحاولة مرة أخرى.', 'error');
     } finally {
       setIsSubmitting(false);
     }
@@ -87,6 +91,12 @@ const ContactSection = () => {
 
   return (
     <section id="contact" className="py-20 bg-gray-50 dark:bg-gray-800/50">
+      <Toast
+        message={toastMessage}
+        type={toastType}
+        isVisible={showToast}
+        onClose={() => setShowToast(false)}
+      />
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-6xl mx-auto">
           {/* Section Header */}

@@ -50,11 +50,14 @@ const Header = () => {
     <motion.header
       initial={{ y: -100 }}
       animate={{ y: 0 }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled 
-          ? 'bg-white/80 dark:bg-gray-900/80 backdrop-blur-md shadow-lg' 
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+        isScrolled
+          ? 'bg-white/95 dark:bg-gray-900/95 backdrop-blur-xl shadow-2xl border-b border-gray-200/20 dark:border-gray-700/20'
           : 'bg-transparent'
       }`}
+      style={{
+        backdropFilter: isScrolled ? 'blur(20px) saturate(180%)' : 'none',
+      }}
     >
       <nav className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 lg:h-20">
@@ -69,7 +72,7 @@ const Header = () => {
                 e.preventDefault();
                 handleNavClick('#home', true);
               }}
-              className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-green-400 bg-clip-text text-transparent"
+              className="text-2xl font-bold font-poppins bg-gradient-to-r from-blue-600 to-green-400 bg-clip-text text-transparent hover:scale-105 transition-transform duration-300"
             >
               Portfolio
             </a>
@@ -101,16 +104,34 @@ const Header = () => {
           {/* Theme Toggle & Mobile Menu Button */}
           <div className="flex items-center space-x-4 rtl:space-x-reverse">
             <motion.button
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
               onClick={toggleTheme}
-              className="p-2 rounded-lg bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-200"
+              className="relative p-3 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 dark:from-yellow-400 dark:to-orange-500 text-white shadow-lg hover:shadow-xl transition-all duration-500 overflow-hidden group"
             >
-              {theme === 'dark' ? (
-                <SunIcon className="h-5 w-5" />
-              ) : (
-                <MoonIcon className="h-5 w-5" />
-              )}
+              <motion.div
+                initial={false}
+                animate={{ rotate: theme === 'dark' ? 0 : 180 }}
+                transition={{ duration: 0.5, ease: "easeInOut" }}
+              >
+                {theme === 'dark' ? (
+                  <SunIcon className="h-5 w-5 group-hover:animate-spin" />
+                ) : (
+                  <MoonIcon className="h-5 w-5 group-hover:animate-pulse" />
+                )}
+              </motion.div>
+
+              {/* Glow effect */}
+              <motion.div
+                className="absolute inset-0 rounded-full opacity-0 group-hover:opacity-30"
+                style={{
+                  background: theme === 'dark'
+                    ? 'radial-gradient(circle, rgba(255,255,0,0.5) 0%, transparent 70%)'
+                    : 'radial-gradient(circle, rgba(147,51,234,0.5) 0%, transparent 70%)'
+                }}
+                animate={{ scale: [1, 1.2, 1] }}
+                transition={{ duration: 2, repeat: Infinity }}
+              />
             </motion.button>
 
             {/* Mobile menu button */}
